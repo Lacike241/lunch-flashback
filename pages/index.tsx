@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, FormEvent} from 'react';
 
 interface Data {
     name: string
@@ -20,7 +20,7 @@ export default function Home() {
         fetchLunches();
     }, []);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await fetch('/api/lunch', {
             method: 'POST',
@@ -33,7 +33,7 @@ export default function Home() {
             setName('');
             setDescription('');
         } else {
-            alert('Chyba pri pridávaní obeda', res);
+            alert('Chyba pri pridávaní obeda');
         }
     };
 
@@ -46,7 +46,7 @@ export default function Home() {
         if (res.ok) {
             setLunches(lunches.filter(o => o._id !== id));
         } else {
-            alert('Chyba pri zmazani obeda', res);
+            alert('Chyba pri zmazani obeda');
         }
     };
 
